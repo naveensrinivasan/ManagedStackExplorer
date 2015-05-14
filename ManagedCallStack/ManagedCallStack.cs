@@ -53,21 +53,42 @@ namespace ManagedCallStack
 
         private async void threadsGrid_SelectionChanged(object sender, EventArgs e)
         {
-            if (threadsGrid.SelectedRows.Count != 0)
+            try
             {
-                DataGridViewRow row = this.threadsGrid.SelectedRows[0];
-                var processId = Convert.ToInt32(((ManagedProcess)processes.SelectedItem).Id);
-                var threadId = Convert.ToInt32(row.Cells[0].Value);
-                var callstack = await Utils.GetCallStack(processId, threadId);
-                callStack.Text = callstack;
-                var stackitems = await Utils.GetStackObjects(processId, threadId);
-                var items = stackitems.Select(root => new
+                if (threadsGrid.SelectedRows.Count != 0)
                 {
-                    Name = root,
-                    RootType = root.Type.Name,
-                }).ToList();
-                stackObjects.DataSource = items;
+                    DataGridViewRow row = this.threadsGrid.SelectedRows[0];
+                    var processId = Convert.ToInt32(((ManagedProcess)processes.SelectedItem).Id);
+                    var threadId = Convert.ToInt32(row.Cells[0].Value);
+                    var callstack = await Utils.GetCallStack(processId, threadId);
+                    callStack.Text = callstack;
+                    var stackitems = await Utils.GetStackObjects(processId, threadId);
+                    var items = stackitems.Select(root => new
+                    {
+                        Name = root,
+                        RootType = root.Type.Name,
+                    }).ToList();
+                    stackObjects.DataSource = items;
+                }
             }
+            catch(Exception ex)
+            {
+                callStack.Text = string.Empty;
+                stackObjects.DataSource = null;
+                Console.WriteLine(ex);
+            }
+            
+        }
+
+        private async void refershToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            processes.DisplayMember = "ProcessName";
+            processes.ValueMember = "Id";
+
+            var result = await Utils.GetManagedProcesses();
+            processes.DataSource = result.Where(item => item.ProcessName != Process.GetCurrentProcess().ProcessName)
+                .Select(item => new ManagedProcess { Processname = item.ProcessName, Id = item.Id }).ToList();
         }
     }
 }

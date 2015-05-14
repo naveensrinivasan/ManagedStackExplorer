@@ -34,6 +34,8 @@
             this.callStack = new System.Windows.Forms.RichTextBox();
             this.stackObjects = new System.Windows.Forms.DataGridView();
             this.threadsGrid = new System.Windows.Forms.DataGridView();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.refershToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -44,6 +46,7 @@
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.stackObjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.threadsGrid)).BeginInit();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -55,6 +58,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.processes);
+            this.splitContainer1.Panel1.Controls.Add(this.menuStrip);
             // 
             // splitContainer1.Panel2
             // 
@@ -68,9 +72,9 @@
             // 
             this.processes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.processes.FormattingEnabled = true;
-            this.processes.Location = new System.Drawing.Point(0, 0);
+            this.processes.Location = new System.Drawing.Point(0, 24);
             this.processes.Name = "processes";
-            this.processes.Size = new System.Drawing.Size(191, 1188);
+            this.processes.Size = new System.Drawing.Size(191, 1164);
             this.processes.TabIndex = 0;
             this.processes.SelectedIndexChanged += new System.EventHandler(this.processes_SelectedIndexChanged);
             // 
@@ -127,16 +131,35 @@
             this.threadsGrid.TabIndex = 2;
             this.threadsGrid.SelectionChanged += new System.EventHandler(this.threadsGrid_SelectionChanged);
             // 
+            // menuStrip
+            // 
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.refershToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(191, 24);
+            this.menuStrip.TabIndex = 1;
+            this.menuStrip.Text = "menuStrip1";
+            // 
+            // refershToolStripMenuItem
+            // 
+            this.refershToolStripMenuItem.Name = "refershToolStripMenuItem";
+            this.refershToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.refershToolStripMenuItem.Text = "Refe&rsh";
+            this.refershToolStripMenuItem.Click += new System.EventHandler(this.refershToolStripMenuItem_Click);
+            // 
             // managedCallStack
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1141, 1188);
             this.Controls.Add(this.splitContainer1);
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "managedCallStack";
             this.Text = "Managed CallStack";
             this.Load += new System.EventHandler(this.managedCallStack_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -146,6 +169,8 @@
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.stackObjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.threadsGrid)).EndInit();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -158,6 +183,8 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.RichTextBox callStack;
         private System.Windows.Forms.DataGridView stackObjects;
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem refershToolStripMenuItem;
     }
 }
 
