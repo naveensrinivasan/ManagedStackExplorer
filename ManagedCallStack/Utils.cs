@@ -105,10 +105,6 @@ namespace ManagedCallStack
 
             return dataTarget.CreateRuntime(dacLocation);
         }
-        static string GetSymbolPath()
-        {
-            return "SRV*http://msdl.microsoft.com/download/symbols";
-        }
         public static async Task<string> GetCallStack(int processId ,int threadId)
         {
             return await Task.Run<string>(() =>
